@@ -40,8 +40,9 @@ function loadChannel(channelId) {
 
 // Vi skapar en funktion som laddar en ny tablå men inte laddar in nytt ljud
 function loadTabla(channelId) {
-    // Hämtar 100 kommande program i tablå (dvs dagens agenda) från SR i XML format för given kanal
-    let url = baseURL + "scheduledepisodes?size=100&channelid=" + channelId;
+    // Hämtar alla program i dagens tablå (enligt dokumentation borde '&size=200' inte behövas, men utan denna hämtas bara en del av dagens tablå)
+    const day = new Date().toISOString().split('T')[0];
+    let url = baseURL + "scheduledepisodes?channelid=" + channelId + "&date=" + day + "&size=200";
 
     // Skapar en ny XMLHttpRequest
     var request = new XMLHttpRequest();
